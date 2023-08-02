@@ -3,13 +3,14 @@ kind: TaskRun
 metadata:
   name: reproducer-03568262
   namespace: reproducer-03568262
-taskSpec:
-    workspaces:
-    - name: source
-    steps:
-      - name: build-and-push-image
-        image: registry.redhat.io/rhel8/buildah
-        script: |
-          echo "FROM registry.access.redhat.com/ubi8/ubi" > Dockerfile
-          buildah bud --storage-driver vfs -t image-registry.openshift-image-registry.svc:5000/reproducer-03568262/test-image:latest .
-          buildah push --storage-driver vfs image-registry.openshift-image-registry.svc:5000/reproducer-03568262/test-image:latest
+spec:
+  taskSpec:
+      workspaces:
+      - name: source
+      steps:
+        - name: build-and-push-image
+          image: registry.redhat.io/rhel8/buildah
+          script: |
+            echo "FROM registry.access.redhat.com/ubi8/ubi" > Dockerfile
+            buildah bud --storage-driver vfs -t image-registry.openshift-image-registry.svc:5000/reproducer-03568262/test-image:latest .
+            buildah push --storage-driver vfs image-registry.openshift-image-registry.svc:5000/reproducer-03568262/test-image:latest
