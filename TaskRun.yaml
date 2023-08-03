@@ -7,6 +7,9 @@ spec:
   taskSpec:
       steps:
         - name: build-and-push-image
+          securityContext:
+            capabilities:
+              add: ["SETFCAP"]
           image: registry.redhat.io/rhel8/buildah
           script: |
             echo "FROM registry.access.redhat.com/ubi8/ubi" > Dockerfile
